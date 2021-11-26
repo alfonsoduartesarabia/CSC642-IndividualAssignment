@@ -3,13 +3,14 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Home from './pages/home';
+import Survey from './pages/survey';
 
 function App() {
   return (
     <div className="App">
-      <Home>
-        
-      </Home>
+      {/* <Home>
+      </Home> */}
+      <Survey></Survey>
     </div>
   );
 }
