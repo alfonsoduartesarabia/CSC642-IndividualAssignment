@@ -1,21 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Form, Container, Row, Col, Dropdown} from 'react-bootstrap';
-import Zip from 'react-zipcode';
+import useFormPersist from 'react-hook-form-persist';
+import { Link } from "react-router-dom";
+
+import './survey.css';
 
 export default function Survey() {
-  const { register, handleSubmit, formState} = useForm();
+  const { register, handleSubmit, watch,setValue,formState} = useForm();
   const [result, setResult] = useState("");
   const onSubmit = (data) => setResult(JSON.stringify(data));
 //   const { step, firstName, lastName, email, address, city, state, zip } = this.state;
 //   const inputValues = { firstName, lastName, email, address, city, state, zip };
 
+    useFormPersist('Form',{watch,setValue});
+
   return (
-    <Container>
-        <h2>CSC 642 848 Fall 2021 Individual Assignment Alfonso Duarte-Sarabia</h2>
-        <h3>Data Survey Form</h3>
-        <br></br>   
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <div className="div-form">
+    <h2>CSC 642 848 Fall 2021 Individual Assignment Alfonso Duarte-Sarabia</h2>
+    <h3>Data Survey Form</h3>
+    <br></br>   
+    <Container className='Container'>
+    <Form onSubmit={handleSubmit(onSubmit)} className="form">
         <Row>
             <Form.Group as={Col} controlId="formFirstName">
                 <Form.Label className="firstname">First Name</Form.Label>
@@ -39,22 +45,22 @@ export default function Survey() {
         </Row>
 
         <Row>
-        <Form.Group as={Col} className="mb-3" controlId="formAddress">
+        <Form.Group as={Col} className="mb-2" controlId="formAddress">
             <Form.Label className="address">Address</Form.Label>
-            <Form.Control type="text" {...register("address")} required></Form.Control>
+            <Form.Control type="text" {...register("address")} required className="address"></Form.Control>
         </Form.Group>      
 
-        <Form.Group as={Col} className="mb-3" controlId="formCity">
+        <Form.Group as={Col} className="mb-2" controlId="formCity">
             <Form.Label className="city">City</Form.Label>
             <Form.Control type="text" {...register("city")} required></Form.Control>
         </Form.Group>  
 
-        <Form.Group as={Col} className="mb-3" controlId="formState">
+        <Form.Group as={Col} className="mb-2" controlId="formState">
             <Form.Label className="state">State</Form.Label>
             <Form.Control type="text" {...register("state")} required></Form.Control>
         </Form.Group>    
         
-        <Form.Group as={Col} className="mb-3" controlId="formZipCode">
+        <Form.Group as={Col} className="mb-2" controlId="formZipCode">
             <Form.Label className="zipcode">Zip Code</Form.Label>
             <Form.Control type="text" 
             {...register("zipcode", {maxLength:5,minLength:4, pattern: /^[0-9]+$/i})} required></Form.Control>
@@ -62,7 +68,7 @@ export default function Survey() {
         </Form.Group>
         </Row>
 
-        <Form.Group controlId="formEmail"  className="mb-3">
+        <Form.Group controlId="formEmail"  className="email">
             <Form.Label className="email">Email Address</Form.Label>
             <Form.Control
             type="email"
@@ -95,5 +101,6 @@ export default function Survey() {
     </Form>
     <p>{result}</p>
     </Container>
+    </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 //import Button from 'react-bootstrap/Button';
 import { Button, Form, Container, Row, Col, FormSelect, Dropdown, DropdownButton } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import Zip from 'react-zipcode';
+// import Zip from 'react-zipcode';
 
 const Home = () => {
     const [result,setResult] = useState("");
