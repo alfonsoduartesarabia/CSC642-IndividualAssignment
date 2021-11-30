@@ -1,19 +1,38 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Form, Container, Row, Col, Dropdown} from 'react-bootstrap';
 import useFormPersist from 'react-hook-form-persist';
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from './Auth';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import './survey.css';
+
+//   const { step, firstName, lastName, email, address, city, state, zip } = this.state;
+//   const inputValues = { firstName, lastName, email, address, city, state, zip };
 
 export default function Survey() {
   const { register, handleSubmit, watch,setValue,formState} = useForm();
   const [result, setResult] = useState("");
-  const onSubmit = (data) => setResult(JSON.stringify(data));
-//   const { step, firstName, lastName, email, address, city, state, zip } = this.state;
-//   const inputValues = { firstName, lastName, email, address, city, state, zip };
+  const [captcha, setCaptcha] = useState(false);
+  let navigate = useNavigate();
+  //const reRef = useRef();
+  //const {completed} = useAuth();
 
-    useFormPersist('Form',{watch,setValue});
+  const onSubmit = async (data) =>    
+  {
+    useAuth.completed(() => {
+        setResult(JSON.stringify(data));
+        navigate('/verification');
+    });
+  };
+
+  function onChange(value) {
+    setCaptcha(true);
+    //console.log("Captcha value:", value);
+  }
+
+  useFormPersist('Form',{watch,setValue});
 
   return (
     <div className="div-form">
@@ -94,12 +113,18 @@ export default function Survey() {
                 required='true'
                 label='I agree to'
             />
-            <a href="#">Terms and Conditions</a>
-        </Form.Group>
+            <a href="/">Terms and Conditions</a>
+        </Form.Group>   
 
-        <Button variant="primary" type="submit">Submit</Button>
+        <ReCAPTCHA 
+        sitekey='6LfA-modAAAAAFgzH3RrMtomnEAcQ_Inpgy5A871' 
+        size='normal'
+        onChange={onChange}
+        />
+
+        <Button variant="primary" type="submit" disabled={!captcha}>Submit</Button>
     </Form>
-    <p>{result}</p>
+    {/* <p>{result}</p> */}
     </Container>
     </div>
   );

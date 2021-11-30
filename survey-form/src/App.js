@@ -5,6 +5,7 @@ import { BrowserRouter,Routes, Route } from 'react-router-dom';
 // import Home from './pages/home';
 import Survey from './pages/survey';
 import Verification from './pages/verification';
+import VerificationRoute from './pages/verificationRoute';
 
 function App() {
   return (
@@ -14,7 +15,11 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Survey/>} />
-            <Route path='verification/*' element={<Verification/>} />
+            <Route path='verification/*' element={
+              <VerificationRoute>
+                <Verification/>
+              </VerificationRoute>
+            } />
           </Routes>
         </BrowserRouter>
     </div>
