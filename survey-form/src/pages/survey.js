@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Form, Container, Row, Col, Dropdown} from 'react-bootstrap';
+import { Button, Form, Container, Row, Col, ToggleButtonGroup, ToggleButton} from 'react-bootstrap';
 import useFormPersist from 'react-hook-form-persist';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from './Auth';
@@ -14,8 +14,14 @@ import './survey.css';
 export default function Survey() {
   const { register, handleSubmit, watch,setValue,formState} = useForm();
   const [result, setResult] = useState("");
+  const [none, setNone] = useState(true);
+  const [professor, setProfessor] = useState(false);
+  const [student, setStudent] = useState(false);
+  const [staff, setStaff] = useState(false);
+
   const [captcha, setCaptcha] = useState(false);
   let navigate = useNavigate();
+  let title = '';
   //const reRef = useRef();
   //const {completed} = useAuth();
 
@@ -27,9 +33,35 @@ export default function Survey() {
     });
   };
 
-  function onChange(value) {
+  function onChange() {
     setCaptcha(true);
     //console.log("Captcha value:", value);
+  }
+
+  function onProffesorChange(){
+    setProfessor(true);
+    setStudent(false);
+    setStaff(false);
+    setNone(false);
+    title = 'Professor';
+  }
+  function onStudentChange(){
+    setStudent(true);
+    setProfessor(false);
+    setStaff(false);
+    setNone(false);
+  }
+  function onStaffChange(){
+    setStaff(true);
+    setProfessor(false);
+    setStudent(false);
+    setNone(false);
+  }
+  function onNoneChange(){
+    setNone(true);
+    setProfessor(false);
+    setStudent(false);
+    setStaff(false);
   }
 
   useFormPersist('Form',{watch,setValue});
@@ -42,7 +74,7 @@ export default function Survey() {
     <Container className='Container'>
     <Form onSubmit={handleSubmit(onSubmit)} className="form">
         <Row>
-            <Form.Group as={Col} controlId="formFirstName">
+            <Form.Group as={Col} controlId="formFirstName" className='mb-4'>
                 <Form.Label className="firstname">First Name</Form.Label>
                 <Form.Control
                 type="text"
@@ -52,7 +84,7 @@ export default function Survey() {
                 {formState.errors.firstname && <p>Please provide a correct name.</p>}
             </Form.Group>
 
-            <Form.Group as={Col} controlId="formLastName">
+            <Form.Group as={Col} controlId="formLastName" className='mb-4'>
                 <Form.Label className="lastname">Last Name</Form.Label>
                 <Form.Control
                 type="text"
@@ -63,8 +95,42 @@ export default function Survey() {
             </Form.Group>
         </Row>
 
+        <Form.Group as={Col} className="mb-4">
+                <Form.Check
+                    type='checkbox'
+                    label='None'
+                    checked={none}
+                    onChange={onNoneChange}
+                >
+                </Form.Check>
+
+                <Form.Check
+                    type='checkbox'
+                    label='Professor'
+                    checked={professor}
+                    onChange={onProffesorChange}
+                    ref={{...register(title)}}
+                >
+                </Form.Check>
+                <Form.Check
+                    type='checkbox'
+                    label='Student'
+                    checked={student}
+                    onChange={onStudentChange}
+                >
+                </Form.Check>
+
+                <Form.Check
+                    type='checkbox'
+                    label='Staff'
+                    checked={staff}
+                    onChange={onStaffChange}
+                >
+                </Form.Check>
+            </Form.Group>
+
         <Row>
-        <Form.Group as={Col} className="mb-2" controlId="formAddress">
+        <Form.Group as={Col} className="mb-3" controlId="formAddress">
             <Form.Label className="address">Address</Form.Label>
             <Form.Control type="text" {...register("address")} required className="address"></Form.Control>
         </Form.Group>      
@@ -87,42 +153,43 @@ export default function Survey() {
         </Form.Group>
         </Row>
 
-        <Form.Group controlId="formEmail"  className="email">
-            <Form.Label className="email">Email Address</Form.Label>
-            <Form.Control
-            type="email"
-            name="email"
-            {...register("email", {pattern: /^\S+@\S+$/i})}
-            required
-            />
-        </Form.Group>
+        <Row>
+            <Form.Group as={Col} controlId="formEmail"  className="email">
+                <Form.Label className="email">Email Address</Form.Label>
+                <Form.Control
+                className="email-form"
+                type="email"
+                name="email"
+                {...register("email", {pattern: /^\S+@\S+$/i})}
+                required
+                />
+            </Form.Group>
 
-        <Form.Group className="mb-3">
-            <Dropdown title='Select Preferred Title' {...register("title")} required>
-            <Dropdown.Toggle className="mb-3">
-            </Dropdown.Toggle>
-                <Dropdown.Menu>
-                    <Dropdown.Item>hh</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
-        </Form.Group>
+        </Row>
 
-        <Form.Group className="mb-4">
+        {/* <Form.Group className="mb-4">
             <Form.Check 
                 type="checkbox"
                 required='true'
                 label='I agree to'
             />
             <a href="/">Terms and Conditions</a>
-        </Form.Group>   
+        </Form.Group>    */}
+
+        <div className="tacbox">
+        <input id="checkbox" type="checkbox"  required/>
+        <label for="checkbox"> I agree to these <a href="#">Terms and Conditions</a>.</label>
+        </div>
 
         <ReCAPTCHA 
         sitekey='6LfA-modAAAAAFgzH3RrMtomnEAcQ_Inpgy5A871' 
         size='normal'
         onChange={onChange}
+        className='captcha'
         />
-
+        <div  className='submit-button'>
         <Button variant="primary" type="submit" disabled={!captcha}>Submit</Button>
+        </div>
     </Form>
     {/* <p>{result}</p> */}
     </Container>
