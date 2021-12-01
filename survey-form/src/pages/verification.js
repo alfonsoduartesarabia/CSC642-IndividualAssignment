@@ -1,7 +1,7 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Geocode from 'react-geocode';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'; 
-import { Container } from "react-bootstrap";
+// import { Container } from "react-bootstrap";
 //mport { GoogleMap ,withScriptjs, withGoogleMap } from 'react-google-maps';
 //import { Wrapper, Status } from "@googlemaps/react-wrapper";
 
@@ -11,6 +11,7 @@ export default function Verification(){
     let data = JSON.parse(sessionStorage.getItem('Form'));
     const fullName = data.firstname + ' ' + data.lastname;
     const address = data.address + ' ' + data.city + ', '  + data.state + ' ' + data.zipcode;
+    const height = data.feet + 'ft ' + data.inches + 'in';
 
     Geocode.setApiKey('AIzaSyBNZdfrybA4otLM4lnkOE_rVkVcRcSEE2E');
     //let latitude; let longitude; 
@@ -23,14 +24,6 @@ export default function Verification(){
         width: '400px',
         height: '400px'
       };    
-
-      const defaultCenter = {
-        lat: 41.3851, lng: 2.1734
-      }
-
-      const render = (status) => {
-        return <h1>{status}</h1>;
-      };
 
     //Get latitude & longitude from address.
     Geocode.fromAddress(address).then(
@@ -52,9 +45,11 @@ export default function Verification(){
             <h2>Results verification page Alfonso Duarte-Sarabia</h2><br/><br/>
             <div  className='verification-container'>
                 <h3>{fullName}</h3>
+                <h2>{data.title}</h2>
+                <h2>{height}</h2>
+                <h3>{data.phone}</h3>
                 <h3>{data.email}</h3>
                 <h2>{address}</h2>
-                <h2>{data.title}</h2>
                 <div className='maps'>
                 <LoadScript googleMapsApiKey='AIzaSyBNZdfrybA4otLM4lnkOE_rVkVcRcSEE2E'>
                     <GoogleMap

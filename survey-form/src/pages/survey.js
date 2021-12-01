@@ -5,8 +5,6 @@ import useFormPersist from 'react-hook-form-persist';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from './Auth';
 import ReCAPTCHA from 'react-google-recaptcha';
-import 'react-phone-number-input/style.css';
-import PhoneInput from 'react-phone-number-input';
 
 import './survey.css';
 
@@ -20,13 +18,9 @@ export default function Survey() {
   const [professor, setProfessor] = useState(false);
   const [student, setStudent] = useState(false);
   const [staff, setStaff] = useState(false);
-  const [phone,setPhone] = useState(null);
 
   const [captcha, setCaptcha] = useState(false);
   let navigate = useNavigate();
-  let title = '';
-  //const reRef = useRef();
-  //const {completed} = useAuth();
 
   const onSubmit = async (data) =>    
   {
@@ -46,7 +40,6 @@ export default function Survey() {
     setStudent(false);
     setStaff(false);
     setNone(false);
-    title = 'Professor';
   }
   function onStudentChange(){
     setStudent(true);
@@ -84,7 +77,7 @@ export default function Survey() {
                 {...register("firstname", {maxLength: 40, pattern: /^[A-Za-z]+$/i}) }
                 required
                 />
-                {formState.errors.firstname && <p>Please provide a correct name.</p>}
+                {formState.errors.firstname && <p className="errors">Please provide a correct name.</p>}
             </Form.Group>
 
             <Form.Group as={Col} controlId="formLastName" className='mb-4'>
@@ -94,20 +87,11 @@ export default function Survey() {
                 {...register("lastname", {maxLength: 40, pattern: /^[A-Za-z]+$/i}) }
                 required
                 />
-                {formState.errors.lastname && <p>Please provide a correct name.</p>}
+                {formState.errors.lastname && <p className="errors">Please provide a correct name.</p>}
             </Form.Group>
         </Row>
 
-        <Form.Group className="mb-4">
-            <Form.Control
-                label="Phone number"
-                type="text"
-                {...register("phone", {maxLength: 20, pattern: /^[0-9]+$/i}) }
-                required
-            />
-            {formState.errors.phone && <p>Plase provide a valid phone number.</p>}
-        </Form.Group>
-
+        <Form.Label className="title">Choose Title</Form.Label>
         <Form.Group as={Col} className="mb-4">
                 <Form.Check
                     type='checkbox'
@@ -122,7 +106,6 @@ export default function Survey() {
                     label='Professor'
                     checked={professor}
                     onChange={onProffesorChange}
-                    ref={{...register(title)}}
                 >
                 </Form.Check>
                 <Form.Check
@@ -141,6 +124,36 @@ export default function Survey() {
                 >
                 </Form.Check>
             </Form.Group>
+
+            <Form.Label className="height">Height</Form.Label>
+        <Row>
+            <Form.Group as={Col} className="mb-4">
+                <Form.Label className="feet">Feet</Form.Label>
+                <Form.Control
+                    type="text"
+                    {...register("feet", {maxLength: 2,minLength: 1, pattern: /^[0-9]+$/i}) }
+                />
+                {formState.errors.feet && <p className="errors">Plase provide a valid height.</p>}
+            </Form.Group>
+
+            <Form.Group as={Col} className="mb-4">
+                <Form.Label className="inches">Inches</Form.Label>
+                <Form.Control
+                    type="text"
+                    {...register("inches", {maxLength: 4,minLength: 1, pattern: /^[0-9]+$/i}) }
+                />
+                {formState.errors.inches && <p className="errors">Plase provide a valid height.</p>}
+            </Form.Group>
+        </Row>
+
+        <Form.Group className="mb-4">
+            <Form.Label className="phone">Phone Number</Form.Label>
+            <Form.Control
+                type="text"
+                {...register("phone", {maxLength: 10,minLength: 10, pattern: /^[0-9]+$/i}) }
+            />
+            {formState.errors.phone && <p className="errors">Plase provide a valid phone number.</p>}
+        </Form.Group>
 
         <Row>
         <Form.Group as={Col} className="mb-3" controlId="formAddress">
@@ -162,8 +175,70 @@ export default function Survey() {
             <Form.Label className="zipcode">Zip Code</Form.Label>
             <Form.Control type="text" 
             {...register("zipcode", {maxLength:5,minLength:4, pattern: /^[0-9]+$/i})} required></Form.Control>
-            {formState.errors.zipcode && <p>Please provide a valid zip.</p>}
+            {formState.errors.zipcode && <p className="errors">Please provide a valid zip.</p>}
         </Form.Group>
+        </Row>
+
+        
+        <Row>
+        <Form.Group as={Col} className="mb-4">
+        <Form.Label className="title">Choose Services You Require</Form.Label>
+                <Form.Check
+                    type='checkbox'
+                    label='Email'
+                >
+                </Form.Check>
+
+                <Form.Check
+                    type='checkbox'
+                    label='Phone'
+                >
+                </Form.Check>
+                <Form.Check
+                    type='checkbox'
+                    label='Facebook'
+                >
+                </Form.Check>
+
+                <Form.Check
+                    type='checkbox'
+                    label='Twitter'
+                >
+                </Form.Check>
+
+                <Form.Check
+                    type='checkbox'
+                    label='Surface Email'
+                >
+                </Form.Check>
+
+                <Form.Check
+                    type='checkbox'
+                    label='Personal Visit'
+                >
+                </Form.Check>
+            </Form.Group>
+
+        <Form.Group as={Col} className="mb-4">
+        <Form.Label className="title">Monthly Budget for Services</Form.Label>
+                <Form.Check
+                    type='checkbox'
+                    label='Less than $50'
+                >
+                </Form.Check>
+
+                <Form.Check
+                    type='checkbox'
+                    label='Between $50 and $100'
+                >
+                </Form.Check>
+                
+                <Form.Check
+                    type='checkbox'
+                    label='Above $100'
+                >
+                </Form.Check>
+            </Form.Group>
         </Row>
 
             <Form.Group as={Col} controlId="formEmail"  className="email">
@@ -176,7 +251,6 @@ export default function Survey() {
                 required
                 />
             </Form.Group>
-
 
         {/* <Form.Group className="mb-4">
             <Form.Check 
