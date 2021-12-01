@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/CSC642-IndividualAssignment/static/css/main.3c2018bc.chunk.css",
+    "main.js": "/CSC642-IndividualAssignment/static/js/main.39d0795e.chunk.js",
+    "main.js.map": "/CSC642-IndividualAssignment/static/js/main.39d0795e.chunk.js.map",
+    "runtime-main.js": "/CSC642-IndividualAssignment/static/js/runtime-main.f59d35e7.js",
+    "runtime-main.js.map": "/CSC642-IndividualAssignment/static/js/runtime-main.f59d35e7.js.map",
+    "static/css/2.d303a4e1.chunk.css": "/CSC642-IndividualAssignment/static/css/2.d303a4e1.chunk.css",
+    "static/js/2.9ae29f08.chunk.js": "/CSC642-IndividualAssignment/static/js/2.9ae29f08.chunk.js",
+    "static/js/2.9ae29f08.chunk.js.map": "/CSC642-IndividualAssignment/static/js/2.9ae29f08.chunk.js.map",
+    "static/js/3.b781d272.chunk.js": "/CSC642-IndividualAssignment/static/js/3.b781d272.chunk.js",
+    "static/js/3.b781d272.chunk.js.map": "/CSC642-IndividualAssignment/static/js/3.b781d272.chunk.js.map",
+    "index.html": "/CSC642-IndividualAssignment/index.html",
+    "static/css/2.d303a4e1.chunk.css.map": "/CSC642-IndividualAssignment/static/css/2.d303a4e1.chunk.css.map",
+    "static/css/main.3c2018bc.chunk.css.map": "/CSC642-IndividualAssignment/static/css/main.3c2018bc.chunk.css.map",
+    "static/js/2.9ae29f08.chunk.js.LICENSE.txt": "/CSC642-IndividualAssignment/static/js/2.9ae29f08.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f59d35e7.js",
+    "static/css/2.d303a4e1.chunk.css",
+    "static/js/2.9ae29f08.chunk.js",
+    "static/css/main.3c2018bc.chunk.css",
+    "static/js/main.39d0795e.chunk.js"
+  ]
+}
