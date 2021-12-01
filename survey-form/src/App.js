@@ -1,7 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { BrowserRouter,Routes, Route } from 'react-router-dom';
+import { HashRouter,Routes, Route } from 'react-router-dom';
 // import Home from './pages/home';
 import Survey from './pages/survey';
 import Verification from './pages/verification';
@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       {/* <Home>
       </Home> */}
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route path='/' element={<Survey/>} />
             <Route path='verification/*' element={
@@ -21,7 +21,7 @@ function App() {
               </VerificationRoute>
             } />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
     </div>
   );
 }
