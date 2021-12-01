@@ -153,7 +153,6 @@ export default function Survey() {
         </Form.Group>
         </Row>
 
-        <Row>
             <Form.Group as={Col} controlId="formEmail"  className="email">
                 <Form.Label className="email">Email Address</Form.Label>
                 <Form.Control
@@ -165,7 +164,6 @@ export default function Survey() {
                 />
             </Form.Group>
 
-        </Row>
 
         {/* <Form.Group className="mb-4">
             <Form.Check 
