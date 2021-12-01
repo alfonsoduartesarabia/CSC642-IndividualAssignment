@@ -11,7 +11,11 @@ export default function Verification(){
     let data = JSON.parse(sessionStorage.getItem('Form'));
     const fullName = data.firstname + ' ' + data.lastname;
     const address = data.address + ' ' + data.city + ', '  + data.state + ' ' + data.zipcode;
-    const height = data.feet + 'ft ' + data.inches + 'in';
+    let height = '';
+
+    if(data.feet !== '' && data.inches !== ''){
+        height = data.feet + 'ft ' + data.inches + 'in';
+    }   
 
     Geocode.setApiKey('AIzaSyBNZdfrybA4otLM4lnkOE_rVkVcRcSEE2E');
     //let latitude; let longitude; 
