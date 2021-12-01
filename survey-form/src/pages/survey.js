@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Form, Container, Row, Col, ToggleButtonGroup, ToggleButton} from 'react-bootstrap';
+import { Button, Form, Container, Row, Col} from 'react-bootstrap';
 import useFormPersist from 'react-hook-form-persist';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from './Auth';
 import ReCAPTCHA from 'react-google-recaptcha';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
 
 import './survey.css';
 
@@ -18,6 +20,7 @@ export default function Survey() {
   const [professor, setProfessor] = useState(false);
   const [student, setStudent] = useState(false);
   const [staff, setStaff] = useState(false);
+  const [phone,setPhone] = useState(null);
 
   const [captcha, setCaptcha] = useState(false);
   let navigate = useNavigate();
@@ -94,6 +97,16 @@ export default function Survey() {
                 {formState.errors.lastname && <p>Please provide a correct name.</p>}
             </Form.Group>
         </Row>
+
+        <Form.Group className="mb-4">
+            <Form.Control
+                label="Phone number"
+                type="text"
+                {...register("phone", {maxLength: 20, pattern: /^[0-9]+$/i}) }
+                required
+            />
+            {formState.errors.phone && <p>Plase provide a valid phone number.</p>}
+        </Form.Group>
 
         <Form.Group as={Col} className="mb-4">
                 <Form.Check
@@ -176,7 +189,7 @@ export default function Survey() {
 
         <div className="tacbox">
         <input id="checkbox" type="checkbox"  required/>
-        <label for="checkbox"> I agree to these <a href="#">Terms and Conditions</a>.</label>
+        <label for="checkbox"> I agree to these <a href="/">Terms and Conditions</a>.</label>
         </div>
 
         <ReCAPTCHA 

@@ -56,7 +56,7 @@ export default function Verification(){
                 <h2>{address}</h2>
                 <h2>{data.title}</h2>
                 <div className='maps'>
-                <LoadScript googleMapsApiKey='AIzaSyBB8N2bo51HLRwJxCndjXz1GrtBclZAq1E'>
+                <LoadScript googleMapsApiKey='AIzaSyBNZdfrybA4otLM4lnkOE_rVkVcRcSEE2E'>
                     <GoogleMap
                         mapContainerStyle={containerStyle}
                         center={location}
