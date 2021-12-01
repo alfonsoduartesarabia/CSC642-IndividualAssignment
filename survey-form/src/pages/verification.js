@@ -12,7 +12,7 @@ export default function Verification(){
     const fullName = data.firstname + ' ' + data.lastname;
     const address = data.address + ' ' + data.city + ', '  + data.state + ' ' + data.zipcode;
 
-    Geocode.setApiKey('AIzaSyBB8N2bo51HLRwJxCndjXz1GrtBclZAq1E');
+    Geocode.setApiKey('AIzaSyBNZdfrybA4otLM4lnkOE_rVkVcRcSEE2E');
     //let latitude; let longitude; 
     const [location,setLocation] = useState({
         lat: null,
