@@ -1,6 +1,6 @@
 # CSC642-IndividualAssignment
-SFSU CSC 642 - UI/IX Design 
-Individual Assignment - Design and Implement a survey form where we gather user information and display their information on a seperate page. The idea was to focus on the UI/UX design and ease of use.
+SFSU CSC 642 - UI/IX Design <br/>
+Individual Assignment - Design and Implement a survey form where we gather user information and display their information on a separate page. The idea was to focus on the UI/UX design and ease of use.
 
 Tools Used:
 * React
